@@ -5,6 +5,7 @@ class BlogsController < ApplicationController
   end
 
   def new
+      @blog = Blog.new
   end
 
   def create
@@ -19,14 +20,31 @@ class BlogsController < ApplicationController
   end
 
   def show
+      @blog = Blog.find(params[:id])
+      @user = User.find(@blog.user_id)
   end
 
   def edit
+      @blog = Blog.find(params[:id])
+      if current_user!= @blog.user
+      redirect_to blog_path
+      end
   end
 
   def update
+      @blog = Blog.find(params[:id])
+      if @blog.update(blog_params)
+         redirect_to blog_path(@blog) ,notice: 'Blog was successfully updated.'
+      else
+         render 'edit'
+      end
   end
 
   def destroy
   end
+
+  private
+    def blog_params
+        params.require(:blog).permit(:title, :body, :image)
+    end
 end
