@@ -29,6 +29,8 @@
                <li><%=link_to "logout"  , destroy_user_session_path,  method: :delete, class: "glyphicon glyphicon-log-out logout" %>
                </li>
 
+               <li><%=link_to "NewFilms"  , new_blog_path, class: "glyphicon glyphicon-log-out newfilms" %>
+
               <% else %>
               <li><%=link_to "Home" ,root_path,class: "glyphicon glyphicon-home home" %></li>
               <li><%=link_to "About" ,about_path,class: "glyphicon glyphicon-link about" %></li>
