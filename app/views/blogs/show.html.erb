@@ -1,76 +1,85 @@
-<body>
-  <div class="body">
-  	<div class="profile-container">
-  		 <div class="container">
-  		 	<div class="row">
-  		 		<div class="col-xs-9">
-  		 			<h2>Film detail</h2>
-  		 			<table class="table table-striped">
-  		 				<tbody>
-  		 					<tr>
-  		 						<td>
-  		 							<%= link_to user_path(@blog.user) do %>
-  		 							<%= attachment_image_tag(@blog.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg") %><br>
-  		 							<%= @blog.user.name %>
-  		 							<% end %>
-  		 						</td>
-  		 						<td>
-  		 							<%= attachment_image_tag @blog, :image, :fill, 60, 60, format: 'jpg' %>
-  		 						</td>
-  		 						<td>
-  		 							<%= link_to @blog.title, blog_path(@blog) %>
-  		 						</td>
-  		 						<td>
-  		 							<%= @blog.body %>
-  		 						</td>
+<div class="container">
+ <h1 class="title">Film detail</h1>
+</div>
 
-  		 						<td>
-				                  <% if @blog.favorited_by?(current_user) %>
-					                  <li>
-					                  <%= link_to blog_favorites_path(@blog), method: :delete do %>
-					                  <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-					                  <%= @blog.favorites.count %> いいね
-					                  <% end %>
-					                  </li>
-					              <% else %>
-					                  <li>
-					                  <%= link_to blog_favorites_path(@blog), method: :post do %>
-					                  <i class="fa fa-heart-o" aria-hidden="true"></i>
-					                  <%= @blog.favorites.count %> いいね
-					                  <% end %>
-					                  </li>
-				                  <% end %>
-				                </td>
+<section class="section">
+	 <div class="container">
+	 	<div class="column is-7">
+	 		<div class="card">
+	 			<div class="card-image">
+	 				<figure class="image is-3by2">
+	 					<%= attachment_image_tag @blog, :image %>
+	 				</figure>
+	 			</div>
+	 			<div class="card-content">
+	 				<div class="media">
+	 					<div class="media-content">
+	 						<p class="title is-4"><%= link_to @blog.title, blog_path(@blog) %></p>
+	 					</div>
+	 				</div>
+	 			</div>
+	 			<div class="content">
+	 				<table class="table is-narrow">
+	 					<tr>
+	 						<th>感想</th>
+	 					</tr>
+	 					<tr>
+	 						<td><%= simple_format @blog.body %></td>
+	 					</tr>
+	 				</table>
+	 				<%if current_user == @blog.user%>
+	 					<td><%= link_to "Edit", edit_blog_path(@blog.id), class: "button is-link" %></td>
+	 					<td><%= link_to "Destroy", blog_path(@blog.id), method: :delete , "data-confirm" => "本当に削除しますか？", class: "button is-link" %></td>
+	 				<% end %>
 
-				                <td>
-				                	<%= @blog.blog_comments.count %>件コメント
-				                </td>
+	 				<% if @blog.favorited_by?(current_user) %>
+	 					<li>
+	 					<%= link_to blog_favorites_path(@blog), method: :delete do %>
+					     <span class="glyphicon glyphicon-heart"><%= @blog.favorites.count%></span>
+					    <% end %>
+	 					</li>
+	 				<% else %>
+	 					<li>
+	 					 <%= link_to blog_favorites_path(@blog), method: :post do %>
+					      <span class="glyphicon glyphicon-heart-empty"><%= @blog.favorites.count %></span>
+					     <% end %>
+	 					</li>
+	 				<% end %>
+	 			</div>
+	 		</div>
+	 	</div>
+	 	<div class="column is-3">
+	 		<article class="panel is-link">
+	 			<p class="panel-heading">
+	 			   By <%= @blog.user.name %>
+	 			</p>
+	 		</article>
+	 		<table>
+	 			<% @blog_comments.each do |blog_comment| %>
+	 				<tr>
+	 					<td class="show-comment">
+	 						<%= link_to user_path(blog_comment.user), class: "user_#{blog_comment.user.id}" do %>
+	 							<%= attachment_image_tag blog_comment.user, :profile_image, fallback: "no_image.jpg", size: "50x50" %><br>
+							    <%= blog_comment.user.name %>
+	 						<% end %>
+	 					</td>
+	 					<td class="show-comment"><%= blog_comment.comment %></td>
+	 					<% if current_user == blog_comment.user %>
+	 						<td><%= link_to 'Destroy', blog_blog_comment_path(@blog, blog_comment), class: 'btn-sm btn-danger', method: :delete %></td>
+	 					<% end %>
+	 				</tr>
+	 			<% end %>
+	 		</table>
+	 		<div class="comment-form">
+	 			<%= form_for [@blog, @comment] do |f| %>
+	 			 	<%= f.text_area :comment, size: "60x5", placeholder: "コメントをここに" %>
+    		    	<%= f.submit "Send", class: "btn-sm btn-primary" %>
+	 			<% end %>
+	 		</div>
+	 	</div>
+	 </div>
+</section>
 
-  		 						<%if current_user == @blog.user%>
-	  		 						<td><%= link_to "Edit", edit_blog_path(@blog.id) %>
-	                                </td>
-	                                <td><%= link_to "Destroy" , blog_path(@blog.id), method: :delete , "data-confirm" => "本当に削除しますか？" %>
-	                                </td>
-                               <%end%>
-  		 					</tr>
-  		 				</tbody>
-  		 			</table>
 
-  		 			<table>
-  		 				<%= form_for [@blog, @comment] do |f| %>
-  		 				 <tr>
-  		 				 	<td>
-  		 				 		<%= f.text_area :comment, placeholder: "コメントをここに" %>
-  		 				 	</td>
-  		 				 	<td>
-  		 				 		<%= f.submit "Send" %>
-  		 				 	</td>
-  		 				 </tr>
-  		 				<% end %>
-  		 			</table>
-  		 		</div>
-  		 	</div>
-  		 </div>
-  	</div>
-  </div>
-</body>
+
+

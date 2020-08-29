@@ -1,24 +1,43 @@
- <div class="col-xs-9">
-     <h1>Films</h1>
-     <table class="table table-striped">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Title</th>
-            <th>Opinion</th>
-          </tr>
-        </thead>
-          <tr>
-           <% @blogs.each do |blog| %>
-            <tbody>
-              <td> <%=link_to(blog.user) do%><%= attachment_image_tag blog.user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg" %><%end%>
-              </td>
-              <td><%= link_to blog_path(blog.id) do %>
-                  <%=blog.title%>
-                  <% end %>
-               </td>
-             </tbody>
-           <%end%>
-        </tr>
-      </table>
-     </div>
+ <div class="container">
+ 	<h1 class="title">
+        Films
+ 	</h1>
+</div>
+
+
+<section class="section">
+	<div class="container">
+		<div class="columns is-multiline">
+			<% @blogs.each do |blog| %>
+				  <div class="column is-3">
+				  	<div class="card">
+				  		<div class="card-image">
+				  			<figure class="image is-3by2">
+				  				<%= link_to blog_path(blog) do %>
+				  				 <%= attachment_image_tag blog, :image %>
+				  				<% end %>
+				  			</figure>
+				  		</div>
+				  		<div class="card-content">
+				  			<div class="media">
+				  				 <div class="media-left">
+				  				 	<figure class="image is-48x48">
+				  				 		<%=link_to(blog.user) do%><%= attachment_image_tag blog.user, :profile_image, fallback: "no_image.jpg" %>
+				  				 	    <%end%>
+				  				 	</figure>
+				  				 </div>
+				  				  <div class="media-">
+				  				  	<div class="title"><%=link_to blog.user.name, user_path(blog.user) %></div>
+				  				  </div>
+				  			</div>
+				  		</div>
+
+				  		<div class="content">
+				  			<time><%= blog.updated_at.strftime("%Y-%m-%d") %></time>更新
+				  		</div>
+				  	</div>
+				  </div>
+		    <% end %>
+		</div>
+	</div>
+</section>

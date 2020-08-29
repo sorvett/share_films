@@ -1,11 +1,5 @@
 class UsersController < ApplicationController
-
-  def index
-      @user = current_user
-      @blog = Blog.new
-      @users = User.all
-      @blogs = Blog.all
-  end
+  before_action :authenticate_user!
 
   def new
          @blog = Blog.new(blog_params)

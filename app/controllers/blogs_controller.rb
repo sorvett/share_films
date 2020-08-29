@@ -15,7 +15,7 @@ class BlogsController < ApplicationController
       redirect_to blog_path(@blog.id), notice: "successfully created blog!"
       else
       @blogs = Blog.all
-      render 'index'
+      render 'new'
     end
   end
 
@@ -43,6 +43,9 @@ class BlogsController < ApplicationController
   end
 
   def destroy
+      @blog = Blog.find(params[:id])
+      @blog.destroy
+      redirect_to blogs_path, notice: "successfully delete blog!"
   end
 
   private

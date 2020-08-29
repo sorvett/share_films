@@ -15,20 +15,12 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bulma";
 
-.navbar-left{
-	color: white;
+.notification:not(:last-child){
+	margin-bottom: 0;
 }
 
-navbar-right{
-	color: white;
-	margin: 0 0 0 auto;
-}
-
-body{
-	margin-top:50px;
-}
-
-.container{
-	height: 60px
+.navbar is-warning{
+	margin-bottom: 20;
 }

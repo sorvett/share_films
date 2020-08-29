@@ -1,3 +1,27 @@
 // Place all the styles related to the homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+*{
+  box-sizing:border-box;
+}
+
+ul{
+  list-style:none;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  li{
+    width:48%;
+    padding:0 10px;
+    &:first-child{ 
+      border-right:1px solid #ccc;
+    }
+    h2{
+      font-size:30px;
+    }
+    p{
+      font-size:15px
+    }
+  }
+}
