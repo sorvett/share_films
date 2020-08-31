@@ -15,9 +15,11 @@ ActiveRecord::Schema.define(version: 2020_08_23_073929) do
   create_table "blog_comments", force: :cascade do |t|
     t.text "comment"
     t.integer "user_id"
-    t.integer "blog_id"
+    t.integer "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_blog_comments_on_book_id"
+    t.index ["user_id"], name: "index_blog_comments_on_user_id"
   end
 
   create_table "blogs", force: :cascade do |t|
