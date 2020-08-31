@@ -3,7 +3,7 @@ class CreateBlogComments < ActiveRecord::Migration[5.2]
     create_table :blog_comments do |t|
       t.text :comment
 	  t.references :user, foreign_key: true
-      t.references :book, foreign_key: true
+      t.references :blog, foreign_key: true
 
       t.timestamps
     end
