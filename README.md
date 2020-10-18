@@ -1,24 +1,39 @@
 # README
+# <Share　Films>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+<映画ブログのサイト>
+色々な方が投稿をすることで知らない映画に出会えるきっかけならばと思い作成に
+至った。私としては話の展開が書かれていてもはいいと考える。理由として
+わかってた方が却って話の内容に入りやすいと思うから。
 
-Things you may want to cover:
+### サイトテーマ
+<映画を共有する>
 
-* Ruby version
+### テーマを選んだ理由
+<いろんな映画を共有するため>
+色々な方が投稿をすることで知らない映画に出会えるきっかけならばと思い作成に至った。
 
-* System dependencies
+### ターゲットユーザ
+<映画をよく見る人>
+映画館で観るより動画配信サイトなどを利用する人に絞る。上記の理由としては、
+映画館の値段が高く自宅などで観る人が多いと考えるから。自宅等のが自分ペースで
+観れるのでそういった方に対象にした。
 
-* Configuration
+### 主な利用シーン
+<映画を観た後に書くなど>
+映画の話題になった時に、最近観た映画を思いだす際のメモとして活用していただく
+のも良いと考える。
 
-* Database creation
+### 機能一覧
+https://docs.google.com/spreadsheets/d/1-uUH5WXE8rs_8ENsPRZ31EMjUumqAY0gtnAy3rPGJJA/edit#gid=977420151
 
-* Database initialization
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- 仮想環境：Vagrant,VirtualBox
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+なし
